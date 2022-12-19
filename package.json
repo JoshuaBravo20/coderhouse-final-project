@@ -16,7 +16,6 @@
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.6.5",
-    "portal-vue": "^3.0.0-beta.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
