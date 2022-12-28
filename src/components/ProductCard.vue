@@ -1,22 +1,25 @@
 <template>
   <div>
     <b-card
-      :title="nombre"
       :img-src="imageSource"
       :img-alt="nombre + ' img'"
       img-top
       tag="article"
-      style="max-width: 24rem"
-      class="mb-2"
+      style="max-width: 20rem; min-width: 20rem;"
+      class="mb-4"
     >
+      <h2>
+        <strong>{{ nombre.toUpperCase() }}</strong>
+      </h2>
       <b-card-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-        ullamcorper vulputate pharetra. Aliquam quis viverra magna.
+        {{ description }}
       </b-card-text>
 
       <div class="row">
         <div class="col">
-          <button class="btn btn-dark">Comprar</button>
+          <button class="btn btn-dark" @click="addToCart()">
+            <strong>COMPRAR</strong>
+          </button>
         </div>
         <div class="col mt-2">
           <strong>{{ precio }}</strong>
@@ -37,6 +40,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -49,12 +53,35 @@ export default {
     nombre: String,
     precio: String,
     consola: String,
-    estudio: String
+    estudio: String,
+    description: String,
   },
   methods: {
+    async addToCart() {
+      let gameObj = {
+        precio: this.precio,
+        nombre: this.nombre,
+        consola: this.consola,
+        estudio: this.estudio,
+        gameDescription: this.description,
+      };
+      await axios.post("https://639fdedf7aaf11ceb8a1fe20.mockapi.io/cart", gameObj);
+      this.$emit('updatedCartChild')
+      this.$toast.open({
+        message: 'Agregado al carrito',
+        type: 'success'
+      })
+    },
     toggleInfoModal() {
-      //console.log('54 name ', nombre, precio, imageSource)
-      this.$emit("toggleShowMoreInfo", this.nombre, this.precio, this.imageSource, this.consola, this.estudio);
+      this.$emit(
+        "toggleShowMoreInfo",
+        this.nombre,
+        this.precio,
+        this.imageSource,
+        this.consola,
+        this.estudio,
+        this.description
+      );
     },
   },
 };
