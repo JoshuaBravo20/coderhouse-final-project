@@ -5,29 +5,17 @@
       <h2 v-if="items.length === 0">No hay stock aún :)</h2>
       <div class="row text-center" v-if="!showMoreInfo">
         <div class="col" v-for="(item, index) in items" :key="index">
-          <product-card
-            :nombre="item.nombre"
-            :imageSource="item.imageSource"
-            :precio="formatPrice(item.precio)"
-            :consola="item.consola"
-            :estudio="item.estudio"
-            :description="item.gameDescription"
-            @updatedCartChild="toggleUpdateCart()"
-            @toggleShowMoreInfo="toggleShowMoreInfo"
-          ></product-card>
+          <product-card :nombre="item.nombre" :imageSource="item.imageSource" :precio="formatPrice(item.precio)"
+            :consola="item.consola" :estudio="item.estudio" :description="item.gameDescription"
+            @updatedCartChild="toggleUpdateCart()" @toggleShowMoreInfo="toggleShowMoreInfo"></product-card>
         </div>
       </div>
       <div class="container d-flex justify-content-center" v-if="showMoreInfo">
-        <b-card
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="min-width: 10rem; max-width: 30rem"
-          class="mb-2 text-center"
-        >
+        <b-card img-alt="Image" img-top tag="article" style="min-width: 10rem; max-width: 30rem"
+          class="mb-2 text-center">
           <b-card-img :src="requestedItem.imageSource"></b-card-img>
 
-          <h2 class="mt-2"><strong>{{requestedItem.nombre.toUpperCase()}}</strong></h2>
+          <h2 class="mt-2"><strong>{{ requestedItem.nombre.toUpperCase() }}</strong></h2>
 
           <h5 class="mt-3">
             {{ requestedItem.description }}
@@ -41,7 +29,7 @@
 
           <div class="row text-center">
             <div class="col">
-              <b-button variant="dark"><strong>COMPRAR</strong></b-button>
+              <b-button variant="dark" @click="addToCart()"><strong>COMPRAR</strong></b-button>
             </div>
             <div class="col"></div>
             <div class="col" @click="showMoreInfo = false">
@@ -56,6 +44,7 @@
 
 <script>
 import ProductCard from "./ProductCard.vue";
+import axios from 'axios'
 export default {
   components: {
     ProductCard,
@@ -72,7 +61,24 @@ export default {
   methods: {
     toggleUpdateCart() {
       this.$emit('updatedCart')
-    }, 
+    },
+    async addToCart() {
+      let gameObj = {
+        precio: this.requestedItem.precio,
+        nombre: this.requestedItem.nombre,
+        consola: this.requestedItem.consola,
+        estudio: this.requestedItem.estudio,
+        gameDescription: this.requestedItem.description,
+      };
+      await axios.post("https://639fdedf7aaf11ceb8a1fe20.mockapi.io/cart", gameObj);
+      this.$toast.open({
+        message: 'Agregado al carrito',
+        type: 'success'
+      })
+      setTimeout(() => {
+        window.location.reload()
+      }, 1400);
+    },
     toggleShowMoreInfo(
       nombre,
       precio,

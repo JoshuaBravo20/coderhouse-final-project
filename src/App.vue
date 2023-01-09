@@ -13,6 +13,7 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 .shadows {
   -webkit-box-shadow: 10px 10px 5px -3px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 10px 10px 5px -3px rgba(0, 0, 0, 0.1);
@@ -20,7 +21,7 @@ export default {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -107,6 +107,8 @@ export default {
     Navbar,
   },
   async created() {
+    console.log('Usuario desde el store -> ', this.$store.state.user)
+
     let userResponse = await axios.get(
       "https://639fdedf7aaf11ceb8a1fe20.mockapi.io/users"
     );

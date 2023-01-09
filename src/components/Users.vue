@@ -14,7 +14,7 @@
 import axios from "axios";
 import Navbar from "./Navbar.vue";
 export default {
-  data() {
+  data() { 
     return {
       items: [],
       cartQuantity: 0

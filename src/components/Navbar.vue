@@ -70,6 +70,7 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
+      this.$store.dispatch('cleanUser')
       this.$router.push("/");
     },
   },
@@ -80,10 +81,9 @@ export default {
     };
   },
   async created() {
-    let auxItem = localStorage.getItem("loggedUser");
-    let auxUser = JSON.parse(auxItem);
-    this.loggedUserName = auxUser.name;
-    this.loggedUserType = auxUser.userType;
+    let userObj = this.$store.getters.getUser
+    this.loggedUserName = userObj.name;
+    this.loggedUserType = userObj.userType;
   },
   props: {
     cartQuantity: Number,

@@ -76,6 +76,9 @@ export default {
             message: "Sesión iniciada con éxito",
             type: "success",
           });
+          let auxItem = localStorage.getItem("loggedUser")
+          let auxUser = JSON.parse(auxItem)
+          this.$store.dispatch('receiveUser', auxUser)
           setTimeout(() => {
             this.$router.push("/main");
           }, 1400);
