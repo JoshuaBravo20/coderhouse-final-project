@@ -1,24 +1,24 @@
-# coderhouse-final-project
 
-## Project setup
+Guía de uso:
+
+- Utilizar credenciales email: `admin@ecommerce.com` y pass: `123456!` (demo) para entrar en calidad de Super Admin.
+- Probar registrarse, crear varios perfiles. También testear con claves incorrectas.
+- Probar agregar productos.
+
+---
+
+## SETUP:
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### COMPILAR Y RECARGAR PARA AMBIENTE DEV:
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### COMPILAR PARA PRODUCCIÓN:
 ```
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
